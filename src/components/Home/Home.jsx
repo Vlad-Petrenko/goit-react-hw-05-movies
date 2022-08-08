@@ -1,19 +1,31 @@
-import { useEffect } from 'react';
+// import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import axios from 'axios';
-import { fetchMovies } from 'services/movies-api';
+import { useAxios } from 'services/movies-api';
 import { Nav } from 'components/Nav/Nav';
+import { MovieItem } from './Home.styled';
 
 export const Home = () => {
-  useEffect(() => {
-    fetchMovies();
-  }, []);
+  const { results: trendingMovies } = useAxios();
+
+  if (!trendingMovies) {
+    return;
+  }
+
+  console.log(trendingMovies);
 
   return (
     <>
       <Nav />
 
-      <div>Home</div>
+      <ul>
+        {trendingMovies.map(({ title, id }) => (
+          <li key={id}>
+            <MovieItem to={'/'} key={id}>
+              {title}
+            </MovieItem>
+          </li>
+        ))}
+      </ul>
       <Outlet />
     </>
   );
