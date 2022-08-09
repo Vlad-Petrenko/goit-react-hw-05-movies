@@ -1,8 +1,8 @@
 import { NavRoute } from './Nav.styled';
 
 const navItems = [
-  { href: '', text: 'Home' },
-  { href: 'movies', text: 'Movies' },
+  { href: '/', text: 'Home' },
+  { href: '/movies', text: 'Movies' },
 ];
 
 export const Nav = () => {
